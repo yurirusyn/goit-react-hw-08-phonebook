@@ -3,19 +3,26 @@ import PropTypes from 'prop-types';
 
 const ContactList = ({ contacts, removeContacts }) => {
   return (
-    <div>
+    <>
       {contacts.map(({ id, name, number }) => {
         return (
-          <>
-            <p key={id} name={name}>
-              {name} {number}
-            </p>
-            <button onClick={e => removeContacts(id)}>Delete</button>
-          </>
+          <div key={id}>
+            <>
+              <p name={name}>
+                {name} {number}
+              </p>
+              <button onClick={e => removeContacts(id)}>Delete</button>
+            </>
+          </div>
         );
       })}
-    </div>
+    </>
   );
 };
 
 export default ContactList;
+
+ContactList.propTypes = {
+  contacts: PropTypes.array.isRequired,
+  removeContacts: PropTypes.func.isRequired,
+};

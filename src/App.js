@@ -16,16 +16,25 @@ class App extends Component {
     filter: '',
   };
 
-  addContacts = contacts => {
-    if (contacts) {
-      alert(`${contacts.name} is already in contacts`);
-    } else if (contacts.name.length === 0) {
-      alert('Fields must be filled!');
-    } else this.setState(prev => ({ contacts: [...prev.contacts, contacts] }));
-  };
+  addContacts = task => {
+    const searchSameName = this.state.contacts
+      .map(cont => cont.name)
+      .includes(task.name);
 
-  addFilter = filter => {
-    this.setState({ filter: [filter] });
+    if (searchSameName) {
+      alert(`${task.name} is already in contacts`);
+    } else if (task.name.length === 0) {
+      alert('Fields must be filled!');
+    } else {
+      const contact = {
+        ...task,
+        id: shortid(),
+      };
+
+      this.setState(prevState => ({
+        contacts: [...prevState.contacts, contact],
+      }));
+    }
   };
 
   filtercontacts = () => {
@@ -47,13 +56,13 @@ class App extends Component {
     }));
 
   render() {
-    const { addContacts, addFilter, filtercontacts, removeContacts } = this;
+    const { addContacts, filtercontacts, removeContacts } = this;
     return (
       <>
         <h1>Phonebook</h1>
         <ContactForm addContacts={addContacts} />
         <h2>Contacts</h2>
-        <Filter addFilter={addFilter} change={this.searchInputChange} />
+        <Filter addFilter={this.state.filter} change={this.searchInputChange} />
         <ContactList
           contacts={filtercontacts()}
           removeContacts={removeContacts}
