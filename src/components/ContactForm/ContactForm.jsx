@@ -2,11 +2,15 @@ import s from './contactForm.css';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
 import { useRef, useState } from 'react';
-const ContactForm = ({ addContacts }) => {
-  // state = {
-  //   name: '',
-  //   number: '',
-  // };
+import { useDispatch } from 'react-redux';
+import actions from '../redux/phonebook/phonebook-actions';
+import { useSelector } from 'react-redux';
+import { getContacts } from '../redux/phonebook/phonebook-selectors';
+
+const ContactForm = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
+
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -33,8 +37,16 @@ const ContactForm = ({ addContacts }) => {
       number,
       id: shortid.generate(),
     };
-    addContacts(newName);
-    resetForm();
+
+    const searchSameName = contacts.map(cont => cont.name).includes(name);
+    if (searchSameName) {
+      alert(`${name} is already in contacts`);
+    } else if (name.length === 0) {
+      alert('Fields must be filled!');
+    } else {
+      dispatch(actions.addContacts(newName));
+      resetForm();
+    }
   };
 
   const resetForm = () => {
