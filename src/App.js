@@ -1,16 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
-import shortid from 'shortid';
+import { useEffect } from 'react';
 import './App.css';
 import ContactForm from './components/ContactForm/ContactForm';
 import ContactList from './components/ContactList/ContactList';
 import Filter from './components/Filter/Filter';
-import {
-  addPhonebookApi,
-  getPhonebookApi,
-  removePhonebookApi,
-} from '../src/services/phonebookApi.js';
 import { getPhonebook } from '../src/components/redux/phonebook/phonebook-operations';
 import { useDispatch } from 'react-redux';
+
 const App = () => {
   const dispatc = useDispatch();
   useEffect(() => {

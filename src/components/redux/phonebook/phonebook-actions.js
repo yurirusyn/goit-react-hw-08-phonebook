@@ -10,8 +10,4 @@ const filter = createAction('todos/filter');
 
 const contactsActions = { addContacts, deleteContact, filter };
 
-// const addPhonebookRequest = createAction('todos/addPhonebookRequest');
-// const addPhonebookSuccess = createAction('todos/addPhonebookSuccess');
-// const addPhonebookError = createAction('todos/addPhonebookError');
-
 export default contactsActions;

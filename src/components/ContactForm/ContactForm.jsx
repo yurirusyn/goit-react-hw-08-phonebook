@@ -1,23 +1,16 @@
-import s from './contactForm.css';
-import PropTypes from 'prop-types';
-import { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import actions from '../redux/phonebook/phonebook-actions';
-import { useSelector } from 'react-redux';
-import { getContacts } from '../redux/phonebook/phonebook-selectors';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { addPhonebook } from '../redux/phonebook/phonebook-operations';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(state => state.contacts.contacts);
 
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
 
   const onInput = e => {
     const { name, value } = e.target;
-
-    // this.setState({ [name]: value });
 
     switch (name) {
       case 'name':

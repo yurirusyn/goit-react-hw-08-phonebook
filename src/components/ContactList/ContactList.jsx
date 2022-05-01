@@ -1,23 +1,23 @@
-import s from './contactList.css';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFilterContacts } from '../redux/phonebook/phonebook-selectors';
-// import actions from '../redux/phonebook/phonebook-actions';
 import { removePhonebook } from '../redux/phonebook/phonebook-operations';
 
+const filterContact = (items, filter) => {
+  return items.filter(contact =>
+    contact.name.toLowerCase().includes(filter.toLowerCase()),
+  );
+};
+
 const ContactList = () => {
-  const contacts = useSelector(getFilterContacts);
-  const items = useSelector(state => state.contacts.contacts);
-  console.log(items);
   const dispatch = useDispatch();
-  // console.log(contacts);
   const removeContacts = id => dispatch(removePhonebook(id));
-  // const newItems = contacts(items, filter);
+  const items = useSelector(state => state.contacts.contacts);
+  const filter = useSelector(state => state.contacts.filter);
+  const newItems = filterContact(items, filter);
+  console.log(newItems);
 
   return (
     <>
-      {contacts.map(({ id, name, phone }) => {
-        // console.log(contacts);
+      {newItems.map(({ id, name, phone }) => {
         return (
           <div key={id}>
             <>
