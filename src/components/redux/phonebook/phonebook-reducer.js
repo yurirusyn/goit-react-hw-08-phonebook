@@ -1,6 +1,10 @@
 import { combineReducers, createReducer } from '@reduxjs/toolkit';
 import actions from '../phonebook/phonebook-actions';
-import { getPhonebook, addPhonebook } from '../phonebook/phonebook-operations';
+import {
+  getPhonebook,
+  addPhonebook,
+  removePhonebook,
+} from '../phonebook/phonebook-operations';
 
 // const defiltContacts = [
 //   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -12,7 +16,7 @@ import { getPhonebook, addPhonebook } from '../phonebook/phonebook-operations';
 const contacts = createReducer([], {
   [getPhonebook.fulfilled]: (_, { payload }) => payload,
   [addPhonebook.fulfilled]: (state, { payload }) => [...state, payload],
-  [actions.deleteContact]: (state, { payload }) =>
+  [removePhonebook.fulfilled]: (state, { payload }) =>
     state.filter(({ id }) => id !== payload),
 });
 
