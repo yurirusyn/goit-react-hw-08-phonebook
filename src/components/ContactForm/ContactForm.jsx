@@ -1,21 +1,22 @@
 import s from './contactForm.css';
 import PropTypes from 'prop-types';
-import shortid from 'shortid';
 import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import actions from '../redux/phonebook/phonebook-actions';
 import { useSelector } from 'react-redux';
 import { getContacts } from '../redux/phonebook/phonebook-selectors';
+import { addPhonebook } from '../redux/phonebook/phonebook-operations';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
 
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
 
   const onInput = e => {
     const { name, value } = e.target;
+
     // this.setState({ [name]: value });
 
     switch (name) {
@@ -23,7 +24,7 @@ const ContactForm = () => {
         setName(value);
         break;
       case 'number':
-        setNumber(value);
+        setPhone(value);
         break;
       default:
         return;
@@ -34,8 +35,7 @@ const ContactForm = () => {
     e.preventDefault();
     const newName = {
       name,
-      number,
-      id: shortid.generate(),
+      phone,
     };
 
     const searchSameName = contacts.map(cont => cont.name).includes(name);
@@ -44,14 +44,14 @@ const ContactForm = () => {
     } else if (name.length === 0) {
       alert('Fields must be filled!');
     } else {
-      dispatch(actions.addContacts(newName));
+      dispatch(addPhonebook(newName));
       resetForm();
     }
   };
 
   const resetForm = () => {
     setName('');
-    setNumber('');
+    setPhone('');
   };
 
   return (
@@ -72,7 +72,7 @@ const ContactForm = () => {
         <input
           type="tel"
           name="number"
-          value={number}
+          value={phone}
           placeholder="Enter Tel"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
