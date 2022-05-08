@@ -3,11 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addPhonebook } from '../redux/phonebook/phonebook-operations';
 
 const ContactForm = () => {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+
   const dispatch = useDispatch();
   const contacts = useSelector(state => state.contacts.contacts);
-
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
 
   const onInput = e => {
     const { name, value } = e.target;
@@ -17,7 +17,7 @@ const ContactForm = () => {
         setName(value);
         break;
       case 'number':
-        setPhone(value);
+        setNumber(value);
         break;
       default:
         return;
@@ -28,7 +28,7 @@ const ContactForm = () => {
     e.preventDefault();
     const newName = {
       name,
-      phone,
+      number,
     };
 
     const searchSameName = contacts.map(cont => cont.name).includes(name);
@@ -44,7 +44,7 @@ const ContactForm = () => {
 
   const resetForm = () => {
     setName('');
-    setPhone('');
+    setNumber('');
   };
 
   return (
@@ -65,7 +65,7 @@ const ContactForm = () => {
         <input
           type="tel"
           name="number"
-          value={phone}
+          value={number}
           placeholder="Enter Tel"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"

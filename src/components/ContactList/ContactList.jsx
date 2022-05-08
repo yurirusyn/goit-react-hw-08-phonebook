@@ -10,19 +10,19 @@ const filterContact = (items, filter) => {
 const ContactList = () => {
   const dispatch = useDispatch();
   const removeContacts = id => dispatch(removePhonebook(id));
+
   const items = useSelector(state => state.contacts.contacts);
   const filter = useSelector(state => state.contacts.filter);
   const newItems = filterContact(items, filter);
-  console.log(newItems);
 
   return (
     <>
-      {newItems.map(({ id, name, phone }) => {
+      {newItems.map(({ id, name, number }) => {
         return (
           <div key={id}>
             <>
               <p name={name}>
-                {name} {phone}
+                {name} {number}
               </p>
               <button onClick={e => removeContacts(id)}>Delete</button>
             </>

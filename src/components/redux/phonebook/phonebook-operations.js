@@ -4,11 +4,22 @@ import {
   getPhonebookApi,
   removePhonebookApi,
 } from '../../../services/phonebookApi';
+import axios from 'axios';
+
+const token = {
+  set(token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  },
+  unset() {
+    axios.defaults.headers.common.Authorization = '';
+  },
+};
 
 export const addPhonebook = createAsyncThunk(
   'contacts/add',
   async (newContact, thunkApi) => {
     try {
+      console.log(newContact);
       const contacts = await addPhonebookApi(newContact);
       return contacts;
     } catch (error) {
@@ -22,6 +33,7 @@ export const getPhonebook = createAsyncThunk(
   async (_, thunkApi) => {
     try {
       const contacts = await getPhonebookApi();
+      token.set(contacts.token);
       return contacts;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
