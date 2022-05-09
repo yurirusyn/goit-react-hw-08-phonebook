@@ -1,13 +1,9 @@
 import { useEffect } from 'react';
 import './App.css';
-import ContactForm from './components/ContactForm/ContactForm';
-import ContactList from './components/ContactList/ContactList';
-import Filter from './components/Filter/Filter';
-import { getPhonebook } from '../src/components/redux/phonebook/phonebook-operations';
 import { useDispatch } from 'react-redux';
 import AppBar from './components/AppBar';
 import authOperations from './components/redux/auth/auth-operations';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import HomeView from './views/HomeView';
 import RegisterView from './views/RegisterView';
 import LoginView from './views/LoginView';
