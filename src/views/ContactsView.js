@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import ContactForm from '../components/ContactForm/ContactForm';
 import ContactList from '../components/ContactList/ContactList';
 import Filter from '../components/Filter/Filter';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getPhonebook } from '../components/redux/phonebook/phonebook-operations';
 
 export default function ContactsView() {

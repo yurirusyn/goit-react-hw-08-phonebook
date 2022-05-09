@@ -4,16 +4,6 @@ import {
   getPhonebookApi,
   removePhonebookApi,
 } from '../../../services/phonebookApi';
-import axios from 'axios';
-
-const token = {
-  set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  },
-  unset() {
-    axios.defaults.headers.common.Authorization = '';
-  },
-};
 
 export const addPhonebook = createAsyncThunk(
   'contacts/add',
