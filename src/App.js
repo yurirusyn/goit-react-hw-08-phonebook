@@ -6,7 +6,7 @@ import Filter from './components/Filter/Filter';
 import { getPhonebook } from '../src/components/redux/phonebook/phonebook-operations';
 import { useDispatch } from 'react-redux';
 import AppBar from './components/AppBar';
-// import authOperations from './components/redux/auth/auth-operations';
+import authOperations from './components/redux/auth/auth-operations';
 import { Switch, Route } from 'react-router-dom';
 import HomeView from './views/HomeView';
 import RegisterView from './views/RegisterView';
@@ -18,9 +18,9 @@ import PublicRoute from './components/PublicRoute';
 const App = () => {
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(authOperations.fetchCurrentUser());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(authOperations.fetchCurrentUser());
+  }, [dispatch]);
 
   return (
     <>
@@ -33,7 +33,7 @@ const App = () => {
           <PublicRoute exact path="/register" restricted>
             <RegisterView />
           </PublicRoute>
-          <PublicRoute exact path="/login" redirectTo="/todos" restricted>
+          <PublicRoute exact path="/login" redirectTo="/contacts" restricted>
             <LoginView />
           </PublicRoute>
           <PrivateRoute path="/contacts" redirectTo="/login">

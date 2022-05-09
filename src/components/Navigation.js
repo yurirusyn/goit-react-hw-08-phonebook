@@ -22,7 +22,7 @@ const Navigation = () => (
 
     <NavLink
       to="/contacts"
-      exact0
+      exact
       style={styles.link}
       activeStyle={styles.activeLink}
     >

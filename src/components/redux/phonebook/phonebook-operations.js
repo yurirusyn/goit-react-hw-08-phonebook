@@ -33,7 +33,6 @@ export const getPhonebook = createAsyncThunk(
   async (_, thunkApi) => {
     try {
       const contacts = await getPhonebookApi();
-      token.set(contacts.token);
       return contacts;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
